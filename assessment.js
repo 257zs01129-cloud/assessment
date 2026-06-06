@@ -15,15 +15,31 @@ assessmentButtn.addEventListener(
     console.log(assessment(userName));
 
     // 診断結果表示エリアの作成
-    resultDivision.innerText = ''//divタグをから文字で上書きすることで空にする。
-    const header = document.createElement('h3');//h3タグの生成
-    header.innerText = '診断結果'//タグの内側のテキストを設定
-    resultDivision.appendChild(header);//divタグの子要素として追加
+resultDivision.innerText = ''//divタグをから文字で上書きすることで空にする。
+
+    //headerDivisionの作成
+    const headerDivision = document.createElement('div');//divタグの生成
+    headerDivision.setAttribute('class', 'card-header text-bg-primary');
+    headerDivision.innerText = '診断結果';//
+    resultDivision.appendChild(headerDivision);//
+
+    //bodyDivisionの作成
+    const bodyDivision = document.createElement('div')
+    bodyDivision.setAttribute('class', 'card-body');
 
     const paragraph = document.createElement('p');
+    paragraph.setAttribute('class', 'card-text');
     const result = assessment(userName);
     paragraph.innerText = result;
-    resultDivision.appendChild(paragraph);
+    bodyDivision.appendChild(paragraph);
+
+    //resultDivisionにBootstrapのスタイルを適応する
+    resultDivision.setAttribute('class', 'card');
+
+    //headerDivisionとbodyDivisionをresultDivisionに差し込む
+    resultDivision.appendChild(headerDivision);
+    resultDivision.appendChild(bodyDivision);
+
 
     // ツイートエリアの作成
     tweetDivision.innerText = ''
@@ -34,7 +50,7 @@ assessmentButtn.addEventListener(
 
     anchor.setAttribute('href', hrefValue);//属性hrefを追加
     anchor.setAttribute('class', 'twitter-hashtag-button');
-    anchor.setAttribute('date-test', result);//診断結果を追加
+    anchor.setAttribute('date-text', result);//診断結果を追加
     anchor.innerText = '#あなたのいいところを投稿する。';
 
     tweetDivision.appendChild(anchor);//divの小要素として使う。
